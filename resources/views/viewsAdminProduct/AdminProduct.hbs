@@ -1,0 +1,175 @@
+ <div class="grid-container">
+
+      <!-- Header -->
+      {{>AdminHeader}}
+      <!-- End Header -->
+
+      <!-- Sidebar -->
+        {{>AdminSidebar}}
+      <!-- End Sidebar -->
+
+      <!-- Main -->
+      <main class="main-container">
+        {{!-- <div class="main-title">
+          <h2>PRODUCT</h2>
+        </div> --}}
+
+        <div class="row">
+            <div class="side-title col-sm-3">
+              <div class="table-cards">
+                <div class="cat-card card">
+                    <div class="card-header">
+                        Category
+                    </div>
+                    <div class="card-body">
+                      <div class="list-group list-group-flush">
+                        <a href="#" class="list-group-item list-group-item-action">The current</a>
+                        <a href="#" class="list-group-item list-group-item-action">A second</a>
+                        <a href="#" class="list-group-item list-group-item-action">A third</a>
+                        <a href="#" class="list-group-item list-group-item-action active">A fourth</a>
+                      </div>
+                    </div>
+                    <div class="card-footer">
+                      <nav aria-label="Page navigation example">
+                          <ul class="pagination">
+                            <li class="page-item">
+                              <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                              </a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                              <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                              </a>
+                            </li>
+                          </ul>
+                        </nav>
+                    </div>
+                </div>               
+              </div>
+            </div>
+            <div class="side-title col-sm-9">
+                <div class="table-cards">
+                  <div class="cat-card card">
+                    <div class="card-header">
+                      Product
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="search col-sm-5 col-5 offset-sm-0 offset-0">
+                              <form class="d-flex search-item" role="search">
+                                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                                  <button class="btn btn-primary" type="submit">Search</button>
+                              </form>
+                            </div>
+                            <div class="btn-add-item d-flex col-sm-3 col-3">
+                              <div class="dropdown">
+                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                  Sort by
+                                </a>
+
+                                <ul class="dropdown-menu">
+                                  <li><a class="dropdown-item" href="#">Action</a></li>
+                                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                </ul>
+                              </div>
+                            </div>
+                            <div class="btn-add-item d-flex col-sm-4 col-4">
+                              <a href="/admin/product/add" type="button" class="btn btn-primary ms-auto" onclick="openAddItemForm()">
+                                  <i class="fa-solid fa-circle-plus"></i>
+                                  Add Product
+                              </a>
+                            </div>
+                        </div>
+                        <table class="table">
+                          <thead>
+                            <tr class="text-center" >
+                              <th scope="col">ID</th>
+                              <th scope="col">Image</th>
+                              <th scope="col">Name</th>
+                              <th scope="col">Price</th>
+                              <th scope="col">Quantity</th>
+                              <th scope="col">Option</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr class="text-center" style="vertical-align: middle;">
+                              <th scope="row">1</th>
+                              <th><img src="https://myshoes.vn/image/cache/catalog/2023/adidas/adi2/giay-adidas-galaxy-6-nam-den-01-500x500.jpg" alt="" width="52px" class="rounded-2"></th>
+                              <td>Shoes</td>
+                              <td>23$</td>
+                              <td>9</td>
+                              <td>
+                                <a href="/admin/product/edit" class="btn btn-primary btn-sm me-2">
+                                  <i class="fa fa-pencil"></i>
+                                </a>
+                                <button href="" class="btn btn-danger btn-sm">
+                                  <i class="fa fa-trash"></i>
+                                </button>
+                              </td>
+                            </tr>
+                            <tr class="text-center" style="vertical-align: middle;">
+                              <th scope="row">1</th>
+                              <th><img src="https://myshoes.vn/image/cache/catalog/2023/adidas/adi2/giay-adidas-galaxy-6-nam-den-01-500x500.jpg" alt="" width="52px" class="rounded-2"></th>
+                              <td>Shoes</td>
+                              <td>23$</td>
+                              <td>9</td>
+                              <td>
+                                <a href="/admin/product/edit" class="btn btn-primary btn-sm me-2">
+                                  <i class="fa fa-pencil"></i>
+                                </a>
+                                <button href="" class="btn btn-danger btn-sm">
+                                  <i class="fa fa-trash"></i>
+                                </button>
+                              </td>
+                            </tr>
+                            <tr class="text-center" style="vertical-align: middle;">
+                              <th scope="row">1</th>
+                              <th><img src="https://myshoes.vn/image/cache/catalog/2023/adidas/adi2/giay-adidas-galaxy-6-nam-den-01-500x500.jpg" alt="" width="52px" class="rounded-2"></th>
+                              <td>Shoes</td>
+                              <td>23$</td>
+                              <td>9</td>
+                              <td>
+                                <a href="/admin/product/edit" class="btn btn-primary btn-sm me-2">
+                                  <i class="fa fa-pencil"></i>
+                                </a>
+                                <button href="" class="btn btn-danger btn-sm">
+                                  <i class="fa fa-trash"></i>
+                                </button>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer">
+                      <nav aria-label="Page navigation example">
+                          <ul class="pagination">
+                            <li class="page-item">
+                              <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                              </a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                              <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                              </a>
+                            </li>
+                          </ul>
+                        </nav>
+                    </div>
+                  </div>
+                </div>
+        </div>
+      </main>
+</div>
+
+{{#section 'bootstrap_bundle_js'}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+{{/section}}

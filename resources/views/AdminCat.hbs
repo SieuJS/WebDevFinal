@@ -1,0 +1,141 @@
+ <div class="grid-container">
+
+      <!-- Header -->
+      {{>AdminHeader}}
+      <!-- End Header -->
+
+      <!-- Sidebar -->
+        {{>AdminSidebar}}
+      <!-- End Sidebar -->
+
+      <!-- Main -->
+      <main class="main-container">
+        <div class="main-title">
+          <h2>CATEGORIES</h2>
+        </div>
+
+        <div class="table-cards">
+          <div class="card-body">
+              <div class="row mb-3">
+                  <div class="search container-fluid col-sm-5 col-6 offset-sm-0 offset-0">
+                  <form class="d-flex search-item" role="search">
+                      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                      <button class="btn btn-primary" type="submit">Search</button>
+                  </form>
+                  </div>
+                  <div class="btn-add-item d-flex col-sm-4 col-4">
+                  <button type="button" class="btn btn-primary ms-auto" onclick="openAddItemForm()">
+                      <i class="fa-solid fa-circle-plus"></i>
+                      Add Category
+                  </button>
+                  </div>
+              </div>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Category Name</th>
+                    <th scope="col" class="text-center" >Option</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td class="text-center">
+                      <button class="btn btn-primary btn-sm me-2" onclick="editRow(this)">
+                        <i class="fa fa-pencil"></i>
+                      </button>
+                      <button href="" class="btn btn-danger btn-sm">
+                        <i class="fa fa-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Mark2</td>
+                    <td class="text-center">
+                      <button class="btn btn-primary btn-sm me-2" onclick="editRow(this)">
+                        <i class="fa fa-pencil"></i>
+                      </button>
+                      <button href="" class="btn btn-danger btn-sm">
+                        <i class="fa fa-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                  <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+          </div>
+        </div>
+      </main>
+</div>
+<!-- Modal for Add Item -->
+<div class="modal fade" id="addItemModal" tabindex="-1" role="dialog" aria-labelledby="addItemModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <form class="modal-content" method="post" action="/">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addItemModalLabel">Add Category</h5>
+        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" aria-label="Close" onclick="cancelAddItemForm()">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <label for="catCode">Category number:</label>
+        <input type="text" id="catCode" name="catCode" class="form-control">
+
+        <label for="catName">Category name:</label>
+        <input type="text" id="catName" name="catName" class="form-control">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelAddItemForm()">Cancel</button>
+        <button type="submit" class="btn btn-primary" onclick="submitAddItemForm()">Add</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal for Edit Item -->
+<div class="modal fade" id="editItemModal" tabindex="-1" role="dialog" aria-labelledby="editItemModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <form class="modal-content" method="post" action="/">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editItemModalLabel">Edit Category</h5>
+        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" aria-label="Close" onclick="cancelEdit()">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <label for="catCode">Category number:</label>
+        <input type="text" id="editCatCode" name="editCatCode" class="form-control">
+
+        <label for="catName">Category name:</label>
+        <input type="text" id="editCatName" name="editCatName" class="form-control">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelEdit()">Cancel</button>
+        <button type="submit" class="btn btn-primary" onclick="saveChanges()">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{{#section 'js'}}
+<script src="/js/adminCategories.js"></script>
+{{/section}}

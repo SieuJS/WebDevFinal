@@ -1,0 +1,126 @@
+ <div class="grid-container">
+
+      <!-- Header -->
+      {{>AdminHeader}}
+      <!-- End Header -->
+
+      <!-- Sidebar -->
+        {{>AdminSidebar}}
+      <!-- End Sidebar -->
+
+      <!-- Main -->
+      <main class="main-container">
+        {{!-- <div class="main-title">
+          <h2>PRODUCT</h2>
+        </div> --}}
+        <a href="/admin/product" class="btn btn-secondary">
+          <i class="fa-solid fa-left-long"></i>
+        </a>
+
+        <div class="row">
+            <div class="side-title col-sm-3">
+              <div class="table-cards">
+                <div class="cat-card card">
+                    <div class="card-header">
+                        Category
+                    </div>
+                    <div class="card-body">
+                      <div class="list-group list-group-flush">
+                        <a href="#" class="list-group-item list-group-item-action">The current</a>
+                        <a href="#" class="list-group-item list-group-item-action">A second</a>
+                        <a href="#" class="list-group-item list-group-item-action">A third</a>
+                        <a href="#" class="list-group-item list-group-item-action active">A fourth</a>
+                      </div>
+                    </div>
+                    <div class="card-footer">
+                      <nav aria-label="Page navigation example">
+                          <ul class="pagination">
+                            <li class="page-item">
+                              <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                              </a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                              <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                              </a>
+                            </li>
+                          </ul>
+                        </nav>
+                    </div>
+                </div>               
+              </div>
+            </div>
+            <div class="side-title col-sm-9">
+                <div class="table-cards">
+                  <div class="cat-card card">
+                    <div class="card-header">
+                      Add Product
+                    </div>
+                    <div class="card-body">
+                        <form action="" enctype="multipart/form-data">
+                            <div class="mb-3">
+                              <label for="inputProductName" class="form-label">Name Product</label>
+                              <input type="text" class="form-control" id="productName" name="productName">
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label for="inputProductPrice" class="form-label">Price</label>
+                                    <input type="text" class="form-control" id="productPrice" name="productPrice">
+                                </div>
+                                <div class="col">
+                                    <label for="inputProductQuantity" class="form-label">Quantity</label>
+                                    <input type="text" class="form-control" id="productQuantity" name="productQuantity">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+                                <textarea class="form-control" id="description" rows="3"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlTextarea1" class="form-label">Full Description</label>
+                                <textarea class="form-control" id="fullDescription" rows="3"></textarea>
+                            </div>
+                            <div class="mb-3">
+                              <label for="inputProductImage" class="form-label">Picture</label>
+                              <div class="file-loading">
+                                <input type="file" class="form-control file-input" id="productImage" name="productImage" multiple>
+                              </div>
+                              <div id="errorBlock" class="help-block"></div>
+                            </div>
+                        </form>
+                    <a href="/admin/product" class="btn btn-secondary">Back</a>
+                    <a href="" class="btn btn-primary">Save</a>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+      </main>
+</div>
+
+{{#section 'bootstrap_bundle_js'}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+{{/section}}
+
+{{#section 'file_input_css'}}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/css/fileinput.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.2/font/bootstrap-icons.min.css">
+{{/section}}
+
+{{#section 'file_input_js'}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/js/fileinput.min.js"></script>
+<script>
+  $('.file-input').fileinput({
+    allowedFileExtensions: ["jpg", "jpeg", "gif", "png"],
+    uploadUrl: '/file-upload-batch/2',
+    maxFilePreviewSize: 10240,
+    elErrorContainer: "#errorBlock"
+})
+</script>
+{{/section}}
+
+
