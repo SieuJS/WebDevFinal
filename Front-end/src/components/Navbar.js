@@ -6,6 +6,7 @@ export default function Navbar() {
     function toggleCat() {
         setShowCatNav(prev => !prev);
     }
+    // navlink phan nav
     return (
         <div className="container-fluid mb-5">
             <div className="row border-top px-xl-5">

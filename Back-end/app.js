@@ -46,11 +46,14 @@ app.get("/chatbox", (req, res) => {
     res.render("chatbox");
 });
 
-// app.listen(port, () => {
-//     console.log(`Listening on port ${port}`);
-// })
-const server = https.createServer({
+app.listen(port, () => {
+    console.log(`Listening on port ${port}`);
+})
+
+/* const server = https.createServer({
     key: fs.readFileSync(path.join(__dirname,'cert','key.pem')),
     cert: fs.readFileSync(path.join(__dirname,'cert','cert.pem'))
 }, app);
+
 server.listen(port, () => console.log(`Secure server on port ${port}`));
+ */
