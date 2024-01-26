@@ -70,7 +70,7 @@ export default function Topbar() {
                 <div className="col-lg-3 col-6 text-right">
                     {auth.role !== "admin" && (
                         <button className="btn btn-secondary">
-                            <NavLink to="/cart" className="px-2">
+                            <NavLink to={`${auth.isLoggedIn ? "/cart" : "/login"}`} className="px-2">
                                 <i className="fas fa-shopping-cart text-primary"></i>
                             </NavLink>
                         </button>
