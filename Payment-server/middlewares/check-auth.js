@@ -8,8 +8,8 @@ module.exports = (req, res, next ) => {
     if(req.method === "OPTIONS"){
         return next();
     }
-    console.log("start check")
     try {
+        
         const authHeaders = req.headers.authorization// authorization : "Bear Token" 
         if(!authHeaders) {
             const error = new Error('Authentication failed');

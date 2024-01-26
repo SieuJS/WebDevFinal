@@ -19,6 +19,7 @@ router.get("/get-by-cat/:catID", productC.getProductByCat);
 router.get("/get-by-page", productC.getProductByPage);
 router.get("/:proid", productC.getById);
 router.get("/get-by-pro/:proID", productC.getProductByProID);
+router.get("/sameproduct/:proid", productC.getSameProduct);
 // router.post("/add", upload.single('proImage'), productC.addProduct);
 // router.post("/update", upload.single('proImage'), productC.updateProduct);
 router.post("/add", productC.addProduct);

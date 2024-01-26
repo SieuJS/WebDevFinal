@@ -43,10 +43,12 @@ module.exports = class Trans {
             const offset = (page - 1) * pageSize;
             const limit = pageSize;
             const accIDCondition = accID ? `WHERE "AccID" = ${accID}` : ''
-            const data = await db.any(`SELECT * FROM "Transaction" ${accIDCondition} LIMIT ${limit} OFFSET ${offset}`);
+            const data = await db.any(`SELECT * FROM "Transaction" ${accIDCondition}  LIMIT ${limit} OFFSET ${offset}`);
             const total = await db.one(`SELECT COUNT(*) FROM "Transaction" ${accIDCondition}`);
+            
             const totalData = parseInt(total.count)
             const totalPage = Math.ceil(totalData / pageSize);
+
             return {
                 data: data,
                 totalPage: totalPage,

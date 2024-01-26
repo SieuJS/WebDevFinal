@@ -65,6 +65,15 @@ module.exports = {
         rs[0].Price = parseInt(rs[0].Price,10);
         res.json(rs);
     },
+    getSameProduct: async (req,res,next) => {
+        const id = req.params.proid;
+        const rs = await productM.getSameProduct(id);
+        const productsWithIntPrice = rs.map(product => ({
+            ...product,
+            Price: parseInt(product.Price, 10)
+        }));
+        res.json(productsWithIntPrice);
+    },
     // deleteCategory: async (req, res, next) => {
     //     try {
     //         const catID = req.query.CatID;

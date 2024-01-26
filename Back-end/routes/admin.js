@@ -4,6 +4,7 @@ const checkAuth = require('../middlewares/check-auth')
 const jwt = require("jsonwebtoken")
 const paymentKey = process.env.JWT_SECOND;
 const HttpError = require('../models/http-error')
+const AdminC = require('../controllers/admin.c')
 
 const accC = require('../controllers/acc.c')
 router.get('/', (req, res) => {
@@ -11,6 +12,9 @@ router.get('/', (req, res) => {
 })
 
 router.get("/list/page", accC.getList);
+
+router.get("/trans/get-by-page" , AdminC.getTransByPage)
+
 
 router.get("/token", (req, res) => {
     let token ;

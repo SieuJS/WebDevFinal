@@ -5,6 +5,9 @@ const express = require('express');
 //import router 
 const AccRouter = require("./routes/acc.r")
 const TransRouter = require("./routes/trans.r")
+const https = require('https')
+const path = require('path')
+const fs = require('fs')
 
 // import middlewares
 
@@ -39,6 +42,13 @@ app.use((error, req, res, next) => {
     res.json({ message: error.message || "There some errors occured " });
 });
 
-app.listen(Port , ()=> {
-    console.log("Server listen on " + Port)
+// app.listen(Port , ()=> {
+//     console.log("Server listen on " + Port)
+// })
+const server = https.createServer({
+    key: fs.readFileSync(path.join(__dirname,'cert','key.pem')),
+    cert: fs.readFileSync(path.join(__dirname,'cert','cert.pem'))
+}, app);
+server.listen(Port, () => {
+    console.log("Server listening on " + Port);
 })

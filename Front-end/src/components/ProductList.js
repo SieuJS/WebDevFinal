@@ -4,6 +4,8 @@ import cartSlice from "../redux/cartSlice"
 import { useEffect, useState } from "react";
 import useFetch from "../hooks/useFetch";
 import { useNavigate } from "react-router-dom";
+import { BACK_END_SERVER } from "../keys/BackEndKeys";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function ProductList(props) {
     const navigate = useNavigate();
@@ -14,7 +16,7 @@ export default function ProductList(props) {
     const page = props.page;
     const pageNumbers = Array.from({ length: pages }, (_, index) => index + 1);
     const onPageChange = props.onPageChange;
-    const { data: categories, isPending, error } = useFetch('/api/categories');
+    const { data: categories, isPending, error } = useFetch(BACK_END_SERVER + '/api/categories');
 
     //price filter
     const [min, setMin] = useState(params.get('min'));
@@ -23,7 +25,6 @@ export default function ProductList(props) {
         if (min && max) {
             params.set('min', min);
             params.set('max', max);
-
             params.set('page',1);
             const newURL = `${window.location.pathname}?${params.toString()}`;
             navigate(newURL);
@@ -74,6 +75,9 @@ export default function ProductList(props) {
         navigate(newURL);
     }
 
+    const notify = () => {
+        toast("Đã thêm vào giỏ hàng");
+    }
     return (
         <div className="container-fluid pt-5">
             <div className="row px-xl-5">
@@ -177,7 +181,7 @@ export default function ProductList(props) {
                                                 <i className="fas fa-eye text-primary mr-1" />
                                                 View Detail
                                             </Link>
-                                            <button className="btn btn-sm text-dark p-0" onClick={() => disPatch(cartSlice.actions.add({...product, orderQuantity: 1}))}>
+                                            <button className="btn btn-sm text-dark p-0" onClick={() => {disPatch(cartSlice.actions.add({...product, orderQuantity: 1})); notify()}}>
                                                 <i className="fas fa-shopping-cart text-primary mr-1" />
                                                 Add To Cart
                                             </button>
@@ -187,7 +191,7 @@ export default function ProductList(props) {
                             )
                             )
                         }
-
+                        <ToastContainer/>
                         <div className="col-12 pb-1">
                             <nav aria-label="Page navigation">
                                 <ul className="pagination justify-content-center mb-3">

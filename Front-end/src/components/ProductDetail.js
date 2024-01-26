@@ -1,6 +1,8 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import cartSlice from '../redux/cartSlice';
 import { UseDispatch, useDispatch } from 'react-redux';
+import { ToastContainer, toast } from "react-toastify";
+
 
 export default function ProductDetail(props) {
     const disPatch = useDispatch();
@@ -11,12 +13,16 @@ export default function ProductDetail(props) {
     const handleMinusClick = () => {
         // Giảm giá trị một đơn vị, nhưng không dưới 1
         setQuantity((prevQuantity) => Math.max(prevQuantity - 1, 1));
-      };
-    
-      const handlePlusClick = () => {
+    };
+
+    const handlePlusClick = () => {
         // Tăng giá trị lên một đơn vị
         setQuantity((prevQuantity) => prevQuantity + 1);
-      };
+    };
+
+    const notify = () => {
+        toast("Đã thêm vào giỏ hàng");
+    }
     return (
         <div className="container-fluid py-5" key={product.ProID}>
             <div className="row px-xl-5">
@@ -114,7 +120,8 @@ export default function ProductDetail(props) {
                                 </button>
                             </div>
                         </div>
-                        <button className="btn btn-primary px-3" onClick={() => disPatch(cartSlice.actions.add({...product ,orderQuantity: quantity}))}><i className="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
+                        <button className="btn btn-primary px-3" onClick={() => { disPatch(cartSlice.actions.add({ ...product, orderQuantity: quantity })); notify() }}><i className="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
+                        <ToastContainer/>
                     </div>
                     <div className="d-flex pt-2">
                         <p className="text-dark font-weight-medium mb-0 mr-2">Share on:</p>
@@ -145,8 +152,7 @@ export default function ProductDetail(props) {
                     <div className="tab-content">
                         <div className="tab-pane fade show active" id="tab-pane-1">
                             <h4 className="mb-3">Product Description</h4>
-                            <p>Eos no lorem eirmod diam diam, eos elitr et gubergren diam sea. Consetetur vero aliquyam invidunt duo dolores et duo sit. Vero diam ea vero et dolore rebum, dolor rebum eirmod consetetur invidunt sed sed et, lorem duo et eos elitr, sadipscing kasd ipsum rebum diam. Dolore diam stet rebum sed tempor kasd eirmod. Takimata kasd ipsum accusam sadipscing, eos dolores sit no ut diam consetetur duo justo est, sit sanctus diam tempor aliquyam eirmod nonumy rebum dolor accusam, ipsum kasd eos consetetur at sit rebum, diam kasd invidunt tempor lorem, ipsum lorem elitr sanctus eirmod takimata dolor ea invidunt.</p>
-                            <p>Dolore magna est eirmod sanctus dolor, amet diam et eirmod et ipsum. Amet dolore tempor consetetur sed lorem dolor sit lorem tempor. Gubergren amet amet labore sadipscing clita clita diam clita. Sea amet et sed ipsum lorem elitr et, amet et labore voluptua sit rebum. Ea erat sed et diam takimata sed justo. Magna takimata justo et amet magna et.</p>
+                            {product.FullDes}
                         </div>
                         <div className="tab-pane fade" id="tab-pane-2">
                             <h4 className="mb-3">Additional Information</h4>

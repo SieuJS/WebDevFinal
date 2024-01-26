@@ -102,7 +102,26 @@ module.exports = class Product{
             throw error;
         }
     }
-
+    static async getSameProduct(proid) {
+        try {
+            // Lấy thông tin category của sản phẩm có ProID là productId
+            const productCategory = await db.one(
+              'SELECT "CatID" FROM "Products" WHERE "ProID" = $1',
+              proid
+            );
+        
+            // Lấy danh sách 8 sản phẩm ngẫu nhiên có category giống với productCategory.CatID
+            const randomProducts = await db.many(
+              'SELECT * FROM "Products" WHERE "CatID" = $1 AND "ProID" != $2 ORDER BY random() LIMIT 8',
+              [productCategory.CatID, proid]
+            );
+        
+            return randomProducts;
+          } catch (error) {
+            throw(error);
+          }
+    }
+    
     // static async getMaxID() {
     //     try {
     //         const data = await db.one(`SELECT MAX("CatID") FROM "${tbName}"`);

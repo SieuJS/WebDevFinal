@@ -2,6 +2,8 @@ const orderM = require('../models/order.m')
 const orderDetailM = require('../models/orderDetail.m')
 const jwt = require('jsonwebtoken')
 const jwtSecondKey = process.env.JWT_SECOND
+require('dotenv').config()
+const paymentServerURL = process.env.PAYMENT_SERVER_HOST
 
 module.exports = {
   placeOrder: async (req, res, next) => {
@@ -31,13 +33,13 @@ module.exports = {
         return next(error);
       }
       //Gọi fetch kiểm tra bên server phụ
-      const checkPayment = await fetch('http://localhost:5001/api/trans', {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        })
+      const checkPayment = await fetch(paymentServerURL + '/api/trans', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      })
       if (!checkPayment.ok) {
         return res.status(checkPayment.status || 401).json({ isSuccess: false });
       }
