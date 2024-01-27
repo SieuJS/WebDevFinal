@@ -39,4 +39,4 @@ BEGIN
 END;
 $$;
 
-CALL create_account('123456',3000000000)
+-- CALL create_account('123456',3000000000)

@@ -1,0 +1,32 @@
+.related-carousel .owl-nav {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    /* right: 8%; */
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+.related-carousel .owl-nav .owl-prev,
+.related-carousel .owl-nav .owl-next {
+    margin: 7px 0;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    background: rgba(0,0,0,0.4);
+    border: 1px solid #FFFFFF;
+    font-size: 30px;
+    transition: .5s;
+}
+
+.related-carousel .owl-nav .owl-prev:hover,
+.related-carousel .owl-nav .owl-next:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+}

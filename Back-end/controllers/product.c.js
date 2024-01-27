@@ -17,7 +17,7 @@ module.exports = {
             const catID = req.query.catID;
             const name = req.query.keyword || ''
             const sort = req.query.sort || ''
-            const pageSize = 2; // số dòng trên 1 trang  
+            const pageSize = 7; // số dòng trên 1 trang  
             const result = await productM.getByPage(catID, name, page, pageSize, sort);
             res.json(result);
         } catch (error) {

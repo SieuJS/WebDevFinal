@@ -22,4 +22,4 @@ END;
 $function$ LANGUAGE plpgsql;
 
 -- Call the function to get the first page with a page size of 3
-SELECT * FROM get_page_data(1, 3);
+

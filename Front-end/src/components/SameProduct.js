@@ -10,6 +10,8 @@ import { Link } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import './SameProduct.css'
+
 const productCard = require('./ProductCard');
 
 export default (props) => {
@@ -37,7 +39,7 @@ export default (props) => {
                 sameproducts && (
                     <div className="row px-xl-5">
                         <div className="col">
-                            <OwlCarousel className="owl-carousel related-carousel" loop margin={10} nav items={4}>
+                            <OwlCarousel className="related-carousel" loop margin={10} nav items={4} navText= "<>">
                                 {sameproducts.map((product) => (
                                     <div className="card product-item border-0" key={product.ProID}>
                                         <div className="card-header product-img position-relative overflow-hidden bg-transparent border p-0">

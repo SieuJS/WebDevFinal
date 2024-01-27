@@ -2,6 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import FileInput from "./FileInput";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import { BACK_END_SERVER as beUrl } from "../../keys/BackEndKeys";
 
 export default function AdminAddProduct() {
     const preset_key = "zjqlggti"
@@ -18,6 +19,7 @@ export default function AdminAddProduct() {
         proFullDes : '',
     })
 
+    const [isLoading, setIsLoading] = useState(false);
     const [errorInput, setErrorInput] = useState({});
 
     const handleInput = (e) => {
@@ -61,6 +63,7 @@ export default function AdminAddProduct() {
         // }
 
         if (file) {
+            setIsLoading(true)
             const formDataCloud = new FormData()
             formDataCloud.append('file', file)
             formDataCloud.append('upload_preset', preset_key);
@@ -70,6 +73,7 @@ export default function AdminAddProduct() {
                 body: formDataCloud
             })
             const dataCloud = await resCloud.json();
+            setIsLoading(false)
             console.log(dataCloud.secure_url);
             if (dataCloud.secure_url) {
                 // formData.append('proImage', file);
@@ -77,9 +81,12 @@ export default function AdminAddProduct() {
             }
         }
         
-        const res = await fetch('/api/product/add', {
+        const userData = JSON.parse(localStorage.getItem('userData'));
+        const token = userData.token;
+        const res = await fetch(`${beUrl}/api/product/add`, {
             method: 'POST',
             headers: {
+                'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(entity),
@@ -101,6 +108,13 @@ export default function AdminAddProduct() {
         </div>
 
         <div className="row">
+            {isLoading == true && (
+            <div style={{ textAlign: "center" }}>
+                <div className="spinner-border" role="status">
+                    <span className="sr-only">Loading...</span>
+                </div>
+            </div>
+            )}
             <div className="side-title col-sm-4">
               <div className="table-cards">
                 <div className="cat-card card">

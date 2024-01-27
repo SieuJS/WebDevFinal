@@ -2,6 +2,7 @@ import $ from 'jquery'
 // import './AdminCat.css'
 import { useState, useContext, useEffect } from 'react';
 import { CatContext } from '../../context/CatContext.js';
+import { BACK_END_SERVER as beUrl } from "../../keys/BackEndKeys";
 
 export default function AdminCat() {
   const { allCategories, setAllCategories, isLoading, isError } = useContext(CatContext);
@@ -14,7 +15,7 @@ export default function AdminCat() {
   // const [categories, setCategories] = useState([]) // du lieu nay dung de phan trang
   // const [name, setName] = useState('');
   const [page, setPage] = useState(1)
-  const pageSize = 4
+  const pageSize = 7
   const lastIndex = page * pageSize;
   const firstIndex = lastIndex - pageSize;
   const categories = allCategories.slice(firstIndex, lastIndex);
@@ -76,9 +77,12 @@ export default function AdminCat() {
       CatName : catName
     }
 
-    const data = await fetch('/api/categories/add', {
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    const token = userData.token;
+    const data = await fetch(`${beUrl}/api/categories/add`, {
       method: 'POST',
       headers: {
+        'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(entity),
@@ -97,7 +101,14 @@ export default function AdminCat() {
 
     if (confirmDelete) {
       try {
-        const result = await fetch(`/api/categories/delete?CatID=${id}`);
+        const userData = JSON.parse(localStorage.getItem('userData'));
+        const token = userData.token;
+        const result = await fetch(`${beUrl}/api/categories/delete?CatID=${id}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          },
+        });
         const data = await result.json();
         if (data.success) {
           setAllCategories(allCategories.filter((item) => item.CatID !== id));
@@ -119,9 +130,12 @@ export default function AdminCat() {
       CatID: catID,
       CatName: catNameEdit,
     }
-    const data = await fetch('/api/categories/update', {
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    const token = userData.token;
+    const data = await fetch(`${beUrl}/api/categories/update`, {
       method: 'POST',
       headers: {
+        'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(entity),

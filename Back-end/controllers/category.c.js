@@ -17,7 +17,7 @@ module.exports = {
     getByPage: async (req, res, next) => {
         try {
             const page = req.query.page || 1;
-            const pageSize = 4; // số dòng trên 1 trang
+            const pageSize = 7; // số dòng trên 1 trang
             const category = await categoryM.getByPage(page, pageSize);
             res.json(category)
         } catch (error) {

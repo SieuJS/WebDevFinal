@@ -1,0 +1,13 @@
+.stat-container{
+    display: grid;
+    grid-template-columns: minmax(537px, 1fr) minmax(537px,1fr);
+    grid-template-rows: 600px ;
+    justify-items: stretch;
+    gap :1.5rem
+}
+
+@media screen and (max-width : 1290px) {
+    .stat-container{
+        display: block;
+    }
+}

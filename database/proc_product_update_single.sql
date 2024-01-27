@@ -25,4 +25,3 @@ BEGIN
 END;
 $$;
 
-CALL proc_update_product(2,'New Product name',NULL,NULL,NULL,NULL, 999);

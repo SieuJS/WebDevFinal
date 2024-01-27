@@ -9,7 +9,7 @@ export default function AdminCatProduct() {
     useContext(CatContext);
 
   const [page, setPage] = useState(1);
-  const pageSize = 4;
+  const pageSize = 7;
   const lastIndex = page * pageSize;
   const firstIndex = lastIndex - pageSize;
   const categories = allCategories.slice(firstIndex, lastIndex);
@@ -38,7 +38,7 @@ export default function AdminCatProduct() {
   };
 
   return (
-    <div className="d-flex cat-product-container gap-3">
+    <div className="cat-product-container gap-3">
       {isLoading == true && (
         <div style={{ textAlign: "center" }}>
           <div className="spinner-border" role="status">
@@ -46,8 +46,6 @@ export default function AdminCatProduct() {
           </div>
         </div>
       )}
-      <div className="side-title cat-side">
-        <div className="table-cards">
           <div className="cat-card card">
             <div className="card-header">Category</div>
             <div className="card-body">
@@ -69,7 +67,7 @@ export default function AdminCatProduct() {
                   })}
               </div>
             </div>
-            <div className="card-footer">
+            <div className="card-footer bottom">
               <nav aria-label="Page navigation example">
                 <ul className="pagination">
                   <li className="page-item">
@@ -115,8 +113,6 @@ export default function AdminCatProduct() {
               </nav>
             </div>
           </div>
-        </div>
-      </div>
       
       <Outlet/>
     </div>

@@ -1,0 +1,18 @@
+{
+  "name": "webdevfinal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "main-server": "nodemon Back-end/app.js",
+    "client-server": "npm start --prefix front-end",
+    "payment-server": "nodemon Payment-server/app.js",
+    "dev": "concurrently \"npm run main-server\" \"npm run client-server\" \"npm run payment-server\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

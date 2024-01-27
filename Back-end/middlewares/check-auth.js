@@ -5,7 +5,6 @@ const jwtKey = process.env.JWT_SECRET_KEY;
 
 
 module.exports = (req, res, next ) => {
-
     if(req.method === "OPTIONS"){
         return next();
     }

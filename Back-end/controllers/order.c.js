@@ -21,6 +21,7 @@ module.exports = {
           {
             userId: userId,
             amount: total
+            // orderID : (pendingStatus)
           },
           jwtSecondKey,
           { expiresIn: "1h" }
@@ -32,6 +33,8 @@ module.exports = {
         );
         return next(error);
       }
+      //add order with pending status
+
       //Gọi fetch kiểm tra bên server phụ
       const checkPayment = await fetch(paymentServerURL + '/api/trans', {
         method: 'POST',
@@ -40,6 +43,7 @@ module.exports = {
           'Content-Type': 'application/json',
         },
       })
+  
       if (!checkPayment.ok) {
         return res.status(checkPayment.status || 401).json({ isSuccess: false });
       }

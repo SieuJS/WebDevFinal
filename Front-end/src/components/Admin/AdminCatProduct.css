@@ -1,3 +1,16 @@
 .cat-product-container {
     min-width: 620px;
 }
+
+.cat-product-container {
+    display: grid;
+    grid-template-columns: minmax(200px, 300px) minmax(600px,1fr);
+    /* grid-template-rows: 600px 600px; */
+    justify-items: stretch;
+}
+
+@media screen and (max-width : 1024px) {
+    .cat-product-container{
+        display: block;
+    }
+}

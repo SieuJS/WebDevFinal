@@ -184,6 +184,12 @@ module.exports = {
       const error = new HttpError("Incorrect password", 420);
       return next(error);
     }
+
+    if (identifierUser.Permission == 0) {
+      const error = new HttpError("Account has been banned", 500);
+      return next(error);
+    }
+
     try {
       token = jwt.sign(
         {
@@ -363,6 +369,7 @@ module.exports = {
 
   },
 
+  // ducthinh update
   banAcc: async (req, res, next) => {
     try {
       const userId = req.body.userId;
@@ -414,5 +421,84 @@ module.exports = {
       const result = await fetchBalance.json();
       res.json(result);
     }
-  }
+  },
+
+  signUpAdminHandler: async (req, res, next) => {
+
+    const {accountName, accountUser, accountDOB, accountEmail, accountPass} = req.body    
+    // const acc = await accM.getByUsername(accountUser);
+
+    // if (acc) {
+    //   console.log(`This username '${acc.Username}' has been existed`);
+    //   console.log('exit')
+    //   const error = new HttpError(
+    //     `This username '${acc.Username}' has been existed`,
+    //     420
+    //   );
+    //   return next(error);
+    // }
+
+    let newUser;
+    try {
+      const hashedPw = await bcrypt.hash(accountPass, saltRound);
+
+      newUser = await accM.add(
+        new accM({
+          Name: accountName,
+          Username: accountUser,
+          Email: accountEmail,
+          Password: hashedPw,
+          DOB: accountDOB,
+          Role: 'admin',
+          Permission: 1 // default when create a new user
+        })
+      );
+    } catch (err) {
+      console.error(err)
+      const error = new HttpError("Something wrong when signup", 500);
+      return next(error);
+    }
+    res.status(201).json({
+      message: "Register new account successfully",
+      user: {
+        id: newUser.ID,
+        name: newUser.Name,
+        username: newUser.Username,
+        email: newUser.Email,
+        role : newUser.Role,
+        permission: newUser.Permission
+      },
+    });
+  },
+
+  updateAdminHandler: async (req, res, next) => {
+    try {
+      const { userId, Name, Email, DOB } = req.body;
+      const newValues = {
+        userId,
+        newUsername: null,
+        newPassword: null,
+        Name,
+        Email,
+        DOB
+      };
+      const result = await accM.updateUser(newValues);
+      if (result) {
+        res.json({
+          message: "Update user succesfully",
+          user: result[0],
+        });
+      } else {
+        res.json({
+          message: "Fail to update user",
+        });
+      }
+
+    } catch (error) {
+      console.error(error);
+      return next(new HttpError ("Some errors occurs", 500));
+    }    
+    
+  },
+
 };

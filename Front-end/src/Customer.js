@@ -13,6 +13,7 @@ import { Navigate } from 'react-router-dom';
 
 function Customer() {
   const {isLoggedIn} = useContext(AuthContext)
+  console.log("Get in customer", isLoggedIn)
   const routes = (
     <>
       <Route path='/cart' exact element={< Cart />} />
@@ -22,8 +23,13 @@ function Customer() {
   return (
     <>
       <Routes>
-        {routes}
-        {/* <Route path='/*' element={<Navigate to = "/login" replace = {true} />} /> */}
+        <Route path='/' exact element={<Home />} />
+        <Route path='/category' exact element={<ProductList />} />
+        <Route path='/product/:proid' exact element={<Detail />} />
+        <Route path='/productlist' exact element={<ProductList />} />
+        <Route path='/search' exact element={<ProductList />} />
+        { isLoggedIn && routes}
+        {/* {<Route path='/*' element={<Navigate to ={isLoggedIn ? "/home": "/login"} replace = {true} />} />} */}
       </Routes>
     </>
   );

@@ -34,4 +34,6 @@ router.get("/token", (req, res) => {
     res.json({message : "Create token succes" , token })
 })
 
+router.post("/changePassword",checkAuth,AdminC.changePassword)
+
 module.exports = router;

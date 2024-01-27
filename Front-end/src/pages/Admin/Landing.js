@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useState, useContext } from "react";
 import { useHttpClient } from "../../hooks/http-hook";
+import { Link } from "react-router-dom";
 
 import { AuthContext } from "../../context/AuthContext";
 
@@ -11,8 +12,11 @@ import AdminSidebar from "../../components/Admin/AdminSidebar";
 import ShopChart from "../../components/Admin/components/Chart";
 import Statistic from "../../components/Admin/Statistic";
 import AdminTable from "../../components/Admin/AdminTable";
+import { BACK_END_SERVER  } from "../../keys/BackEndKeys";
 
 import io from "socket.io-client";
+
+import './Landing.css'
 
 function Landing() {
   const auth = useContext(AuthContext);
@@ -55,7 +59,7 @@ function Landing() {
   useEffect(() => {
     if (auth.isLoggedIn) {
       setSocket(
-        io.connect("http://localhost:5000", {
+        io.connect(BACK_END_SERVER, {
           query: { token: `Bearer ${auth.token}` },
         })
       );
@@ -133,21 +137,19 @@ function Landing() {
   return (
     <>
       <Statistic data={statData} />
-      <div class="row">
-        <div className="col-xl-6 col-lg-12">
+      <div class="stat-container">
+
           <div class=" charts-card ">
             <h2 class="chart-title text-light">Real Time Report</h2>
             <ShopChart data={statData} />
           </div>
-        </div>
-        <div className="col-xl-6 col-lg-12">
           <div class="charts-card overflow-x-scroll">
             <h2 class="chart-title text-light">Users Board</h2>
             <div className="btn-add-item d-flex">
-              <button type="button" className="btn btn-primary ms-auto">
+              <Link to="/admin/account/add" type="button" className="btn btn-primary ms-auto">
                   <i className="fa-solid fa-circle-plus m-1"></i>
                   Add Account Admin
-              </button>
+              </Link>
             </div>
             <AdminTable usersData={usersData} banHandler = {banHandler}/>
             <div className="card-footer d-flex justify-content-center">
@@ -184,7 +186,6 @@ function Landing() {
               </nav>
             </div>
           </div>
-        </div>
       </div>
     </>
   );

@@ -3,15 +3,16 @@ import cartSlice from "../redux/cartSlice";
 import { useDispatch } from "react-redux";
 
 export default function AuthHook() {
-    const disPatch = useDispatch();
+
     const [token, setToken] = useState(null);
     const [userId, setUserId] = useState();
     const [deadlineToken, setDeadlineToken] = useState();
     const [role, setRole] = useState();
   
     const tokenTimeRef = useRef();
-  
+    const disPatch = useDispatch()
     useEffect(() => {
+      console.log('first time run')
       const userData = JSON.parse(localStorage.getItem('userData'));
       console.log(userData)
       if(!userData) {
@@ -58,5 +59,5 @@ export default function AuthHook() {
         clearTimeout(tokenTimeRef);
       }
     }, [token, logout])
-  return {login, logout, token, userId, role};
+  return [login, logout, token, userId, role];
 }

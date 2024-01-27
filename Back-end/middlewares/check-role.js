@@ -5,12 +5,13 @@ const jwtKey = process.env.JWT_SECRET_KEY;
 
 module.exports = (req,res,next) => {
     try {
-        const role = req.role;
+        const role = req.userData.role;
+        console.log(role);
         if (!role) {
             const error = new Error('Authorization failed');
             throw error;
         }
-        if (role != 'admin') {
+        if (role.toLowerCase().trim() !== 'admin') {
             const error = new Error('Authorization failed');
             throw error;
         }

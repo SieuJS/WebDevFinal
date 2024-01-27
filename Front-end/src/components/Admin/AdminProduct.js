@@ -95,7 +95,14 @@ export default function AdminProduct() {
 
     if (confirmDelete) {
       try {
-        const result = await fetch(`${beUrl}/api/product/delete?proID=${proID}`);
+        const userData = JSON.parse(localStorage.getItem('userData'));
+        const token = userData.token;
+        const result = await fetch(`${beUrl}/api/product/delete?proID=${proID}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          },
+        });
         const data = await result.json();
         if (data.success) {
           setAllProducts(allProducts.filter((item) => item.ProID !== proID));
@@ -106,8 +113,7 @@ export default function AdminProduct() {
     }
   }
     return (
-      <div className="side-title prod-side flex-grow-1">
-          <div className="table-cards">
+
             <div className="cat-card card">
               <div className="card-header">
                 Product
@@ -156,7 +162,7 @@ export default function AdminProduct() {
                               <td>{parseFloat(pro.Price).toLocaleString()}</td>
                               <td>{pro.Quantity}</td>
                               <td>
-                                <Link to={`${beUrl}/admin/product/edit?catID=${catID}&proID=${pro.ProID}`} className="btn btn-primary btn-sm m-1">
+                                <Link to={`/admin/product/edit?catID=${catID}&proID=${pro.ProID}`} className="btn btn-primary btn-sm m-1">
                                   <i className="fa fa-pencil"></i>
                                 </Link>
                                 <button href="" className="btn btn-danger btn-sm m-1" onClick={(e) => deleteRow(pro.ProID)}>
@@ -234,7 +240,5 @@ export default function AdminProduct() {
                   </nav>
               </div>
             </div>
-          </div>
-      </div>
     )
 }

@@ -20,9 +20,9 @@ module.exports = class Trans {
         }
     }
 
-    static async transaction(id, amount) {
+    static async transaction(id, amount, orderID) {
         try {
-            const data = await db.proc("proc_transaction", [id, 1, amount]);
+            const data = await db.proc("proc_transaction", [id, 1, orderID, amount]);
             return data;
         } catch (err) {
             throw err;
@@ -38,14 +38,13 @@ module.exports = class Trans {
         }
     }
 
-    static async getByPage(accID, page, pageSize) {
+    static async getByPage(userID, page, pageSize) {
         try {
             const offset = (page - 1) * pageSize;
             const limit = pageSize;
-            const accIDCondition = accID ? `WHERE "AccID" = ${accID}` : ''
-            const data = await db.any(`SELECT * FROM "Transaction" ${accIDCondition}  LIMIT ${limit} OFFSET ${offset}`);
-            const total = await db.one(`SELECT COUNT(*) FROM "Transaction" ${accIDCondition}`);
-            
+            const userIDCondition = userID ? `WHERE tb2."ShopID" = '${userID}'` : ''
+            const data = await db.any(`SELECT tb1.*, tb2."ShopID" FROM "Transaction" tb1 JOIN "Account" tb2 ON tb1."AccID" = tb2."AccID" ${userIDCondition}  LIMIT ${limit} OFFSET ${offset}`);
+            const total = await db.one(`SELECT COUNT(*) FROM "Transaction" tb1 JOIN "Account" tb2 ON tb1."AccID" = tb2."AccID" ${userIDCondition}`);
             const totalData = parseInt(total.count)
             const totalPage = Math.ceil(totalData / pageSize);
 

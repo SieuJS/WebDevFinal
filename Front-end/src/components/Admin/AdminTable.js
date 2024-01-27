@@ -1,16 +1,20 @@
 import * as React from "react";
+import { BACK_END_SERVER as beUrl } from "../../keys/BackEndKeys";
 
 export default function DataTable(props) {
   const usersData = props.usersData;
 
   const handlePermission = async (userId, permission) => {
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    const token = userData.token;
     if (permission === 1)
       permission = 0
     else
       permission = 1
-    const result = await fetch('http://localhost:5000/api/account/ban', {
+    const result = await fetch(`${beUrl}/api/account/ban`, {
       method: 'POST',
       headers: {
+          'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
       },
       body: JSON.stringify({
@@ -50,11 +54,11 @@ export default function DataTable(props) {
                   <td>{user.DOB}</td>
                   <td>{user.Role.trim().toLowerCase()}</td>
                   <td>
-                    {user.Permission !== 1 ? (
+                    {user.Role.trim().toLowerCase() !== 'admin' ? user.Permission !== 1 ? (
                       <i class="fa-solid fa-lock icon-ban" onClick={() => handlePermission(user.ID, user.Permission)}></i>
                     ) : (
                       <i class="fa-solid fa-unlock icon-unban" onClick={() => handlePermission(user.ID, user.Permission)}></i>
-                    )}
+                    ) : ''}
                   </td>
                 </tr>
               );
