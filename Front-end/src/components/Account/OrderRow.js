@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react";
 import { useHttpClient } from "../../hooks/http-hook";
 import { ORDERS_API as ordersApi } from "../../keys/BackEndKeys";
+import { fontGrid } from "@mui/material/styles/cssUtils";
 
 export default function OrderRow({ anOrder, count }) {
     const { sendRequest } = useHttpClient();
     const [details, setDetails] = useState([]);
+    const [orderInfo, setOrderInfo] = useState({
+        orderDate: "",
+        price: ""
+    })
     const totalOrigin = anOrder.Total;
     useEffect(() => {
         async function fetchDetail() {
@@ -24,12 +29,27 @@ export default function OrderRow({ anOrder, count }) {
             }
         }
         fetchDetail();
+
+        const tempDate = anOrder.OrderDate;
+        const date = tempDate.substring(0, 10);
+        const tempPrice = parseInt(anOrder.Price);
+        const price = formatWithDot(tempPrice);
+
+        setOrderInfo({
+            orderDate: date,
+            price: price
+        });
+
     }, [anOrder.OrderID]);
+
+    function formatWithDot(n) {
+        return n.toString ().replace (/B (?= (d {3})+b)/g, ".");
+      }
     return (
         <>
             <tr>
                 <td>{count}</td>
-                <td>{anOrder.Date}</td>
+                <td>{anOrder.OrderDate}</td>
                 <td>{anOrder.Address} {anOrder.Phone}</td>
                 <td>
                     {details.length > 0 && details.map(detail => {
