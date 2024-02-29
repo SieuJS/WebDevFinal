@@ -435,7 +435,7 @@ function Auth() {
                           className="btn btn-dark btn-lg btn-block"
                           onClick={authSubmitHandler}
                           variant="contained"
-                          disabled = {!isRegisterWithGoogle || !formState.isValid}
+                          disabled = { !formState.isValid}
                         >
                           {isLoginMode ? "Login" : "Register"}
                         </Button>
