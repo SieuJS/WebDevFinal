@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "main-server": "nodemon Back-end/app.js",
+    "main-server": "cd Back-end && npm start",
     "client-server": "npm start --prefix Front-end",
-    "payment-server": "nodemon Payment-server/app.js",
-    "dev": "concurrently \"npm run main-server\" \"npm run client-server\" \"npm run payment-server\""
+    "payment-server": "cd Payment-server && npm start",
+    "start": "concurrently \"npm run main-server\" \"npm run client-server\" \"npm run payment-server\""
   },
   "keywords": [],
   "author": "",
